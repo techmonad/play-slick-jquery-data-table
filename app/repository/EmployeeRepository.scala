@@ -37,7 +37,7 @@ class EmployeeRepository @Inject()(protected val dbConfigProvider: DatabaseConfi
     empTableQuery.filter(_.id === empId).result.headOption
   }
 
-  def ddl: profile.SchemaDescription = empTableQuery.schema
+  def ddl: Future[Unit] = db.run(empTableQuery.schema.create)
 
 }
 
@@ -51,14 +51,13 @@ private[repository] trait EmployeeTable {
 
   private[EmployeeTable] class EmployeeTable(tag: Tag) extends Table[Employee](tag, "employee") {
     val id: Rep[Int] = column[Int]("id", O.AutoInc, O.PrimaryKey)
-    val firstName: Rep[String] = column[String]("first_name", O.SqlType("VARCHAR(200)"))
-    val lastName: Rep[String] = column[String]("last_name", O.SqlType("VARCHAR(200)"))
+    val name: Rep[String] = column[String]("first_name", O.SqlType("VARCHAR(200)"))
     val position: Rep[String] = column[String]("position")
     val office: Rep[String] = column[String]("office")
     val startDate: Rep[String] = column[String]("start_date")
     val salary = column[String]("salary")
 
-    def * : ProvenShape[Employee] = (firstName, lastName, position, office, startDate, salary, id.?) <> (Employee.tupled, Employee.unapply)
+    def * : ProvenShape[Employee] = (name, position, office, startDate, salary, id.?) <> (Employee.tupled, Employee.unapply)
   }
 
 }

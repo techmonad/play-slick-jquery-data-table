@@ -1,8 +1,9 @@
 package models
 
+
+
 case class Employee(
-                     nameName: String,
-                     lastName: String,
+                     name:String,
                      position: String,
                      office: String,
                      startDate: String,
@@ -10,3 +11,6 @@ case class Employee(
                      id: Option[Int] = None
                    )
 
+
+
+case class PaginationData(draw: Int, recordsTotal: Int, recordsFiltered: Int, data: List[Employee])

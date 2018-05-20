@@ -7,11 +7,10 @@ $(document).ready(function() {
             "type": "POST"
         },
         "columns": [
-            { "data": "first_name" },
-            { "data": "last_name" },
+            { "data": "name" },
             { "data": "position" },
             { "data": "office" },
-            { "data": "start_date" },
+            { "data": "startDate" },
             { "data": "salary" }
         ]
     } );

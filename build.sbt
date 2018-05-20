@@ -9,6 +9,8 @@ lazy val root = (project in file(".")).enablePlugins(PlayScala)
 
 scalaVersion := "2.12.4"
 
+val akkaVersion = "2.5.11"
+
 libraryDependencies ++= Seq(
   guice,
   "com.typesafe.play" %% "play-slick" % "3.0.0",
